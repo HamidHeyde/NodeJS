@@ -2,28 +2,35 @@
 //Importing Packages
 //=========================
 const express = require ('express');
+const exphbs  = require('express-handlebars');
 
 const app = express();
 
 //=========================
 //Middleware
 //=========================
-app.use((req,res,next) => {
+//Sample
+// app.use((req,res,next) => {
     
-    next();
-})
+//     next();
+// })
+
+//Express - Handlebars
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main'
+ }));
+app.set('view engine', 'handlebars');
 //=========================
 //Routes
 //=========================
 //Index
 app.get('/', (req,res) => {
-    res.send(`index page`);
+    res.render('index');
 })
 
 //About
 app.get('/about', (req,res) => {
-    console.log(req.name);
-    res.send(`about page`);
+    res.render('about');
 })
 
 //=========================
@@ -32,5 +39,5 @@ app.get('/about', (req,res) => {
 const port = 5000;
 
 app.listen(port, () => {
-    console.log(`app started @ ${port}`);
+    console.log('app started @ '+ port);
 });
