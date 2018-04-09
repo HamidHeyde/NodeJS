@@ -16,6 +16,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/todolist-dev',{
 .then(() => console.log('... Now Connected to mongo db .... '))
 .catch(err => console.log(err));
 
+//Loading Models
+require('./models/list_item');
+const list_item = mongoose.model('list_item');
+require('./models/user');
+const list_item = mongoose.model('user');
+
 //Middleware
 //=========================
 //Sample
