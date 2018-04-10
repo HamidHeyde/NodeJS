@@ -12,15 +12,17 @@ const app = express();
 mongoose.Promise = global.Promise;
 //Mongoose Connect
 mongoose.connect('mongodb://127.0.0.1:27017/todolist-dev',{
+ //useMongoClient:true
 })
 .then(() => console.log('... Now Connected to mongo db .... '))
 .catch(err => console.log(err));
 
 //Loading Models
-require('./models/list_item');
-const list_item = mongoose.model('list_item');
+require('./models/list_item.js');
+const list_item_model = mongoose.model('list_item');
+
 require('./models/user');
-const list_item = mongoose.model('user');
+const user_model = mongoose.model('user');
 
 //Middleware
 //=========================
@@ -41,6 +43,16 @@ app.set('view engine', 'handlebars');
 //Index
 app.get('/', (req,res) => {
     res.render('index');
+})
+
+//Items
+app.get('/items', (req,res) => {
+    res.render('items');
+})
+
+//Add New Items
+app.get('/items/add', (req,res) => {
+    res.render('items/add');
 })
 
 //About
