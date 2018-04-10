@@ -1,11 +1,13 @@
 //Importing Packages
-//=========================
+//=========================//=========================
 const express = require ('express');
 const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
+var bodyParser = require('body-parser')
+
 
 //app
-//=========================
+//=========================//=========================
 const app = express();
 
 //Some Code to get rid of some mongodb_errorsc
@@ -25,7 +27,7 @@ require('./models/user');
 const user_model = mongoose.model('user');
 
 //Middleware
-//=========================
+//=========================//=========================
 //Sample
 // app.use((req,res,next) => {
     
@@ -38,8 +40,12 @@ app.engine('handlebars', exphbs({
  }));
 app.set('view engine', 'handlebars');
 
+//Express Body-parser
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 //Routes
-//=========================
+//=========================//=========================
 //Index
 app.get('/', (req,res) => {
     res.render('index');
@@ -48,6 +54,10 @@ app.get('/', (req,res) => {
 //Items
 app.get('/items', (req,res) => {
     res.render('items');
+})
+
+app.post('/items', (req,res) => {
+    res.send('OK');
 })
 
 //Add New Items
@@ -61,7 +71,7 @@ app.get('/about', (req,res) => {
 })
 
 //App start Settings
-//=========================
+//=========================//=========================
 const port = 5000;
 
 app.listen(port, () => {
