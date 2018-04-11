@@ -63,7 +63,17 @@ app.get('/items', (req, res) => {
     
 })
 
-
+app.get('/items/:id', (req, res) => {
+    
+    list_item_model.remove({
+        _id:req.params.id
+    })
+    .then(() => {
+        res.redirect('/items');
+    })
+    .catch(err => console.log(err));
+    
+})
 
 app.post('/items', (req, res) => {
     const referal = req.body.referal;
