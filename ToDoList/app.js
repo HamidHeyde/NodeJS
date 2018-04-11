@@ -1,6 +1,7 @@
 //Importing Packages
 //=========================//=========================
 const express = require('express');
+const path = require ('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser')
@@ -43,6 +44,9 @@ app.set('view engine', 'handlebars');
 //Express Body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+//Static Folder
+app.use(express.static(path.join(__dirname,'public')));
 
 //Routes
 //=========================//=========================
