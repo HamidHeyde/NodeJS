@@ -1,1 +1,12 @@
-<h1>Items List</h1>
+{{#each list_items}}
+<div class="card card-body mb-5">
+    <h4>{{title}}</h4>
+    <p>{{Description}}</p>
+    <a href="/items/edit/{{_id}}" class="btn btn-dark btn-block">
+        Edit
+    </a>
+    
+</div>
+{{else}}
+<p>No Item Available</p>
+{{/each}}
