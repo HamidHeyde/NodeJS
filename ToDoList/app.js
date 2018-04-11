@@ -63,21 +63,11 @@ app.get('/items', (req, res) => {
     
 })
 
-app.get('/items/:id', (req, res) => {
-    
-    list_item_model.remove({
-        _id:req.params.id
-    })
-    .then(() => {
-        res.redirect('/items');
-    })
-    .catch(err => console.log(err));
-    
-})
+
 
 app.post('/items', (req, res) => {
     const referal = req.body.referal;
-    console.log(referal);
+    //console.log(referal);
     let errors = [];
     if (!req.body.title) {
         errors.push({ text: "Please Add a Title" });
@@ -129,7 +119,29 @@ app.post('/items', (req, res) => {
     
 })
 
+
+app.get('/items/delete/:id', (req, res) => {
+    
+    if (req.params.id)
+    {
+        list_item_model.remove({
+            _id:req.params.id
+        })
+        .then(() => {
+            res.redirect('/items');
+        })
+        .catch(err => console.log(err));
+    }
+    else
+    {
+        res.redirect('/items');
+    }
+    
+})
+
+
 app.get('/items/edit/:id', (req,res) => {
+    
     list_item_model.findOne({
         _id:req.params.id
     })
