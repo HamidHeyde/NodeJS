@@ -1,10 +1,13 @@
 //Importing Packages
 //=========================//=========================
 const express = require('express');
+const session = require('client-sessions');
+//const session = require('express-session')
 const path = require ('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const {requireLogin} = require ('./helpers/auth')
 
 
 //app
@@ -26,6 +29,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/todolist-dev', {
 
 //Loading Models
 //===========
+require('./models/user');
+const user_model = mongoose.model('user');
 
 //Middleware
 //=========================//=========================
@@ -34,6 +39,49 @@ mongoose.connect('mongodb://127.0.0.1:27017/todolist-dev', {
 
 //     next();
 // })
+//sessions
+app.use(session({
+    cookieName: 'session',
+    secret: 'random_string_goes_here',
+    duration: 2 * 60 * 1000,
+    activeDuration: 1 * 60 * 1000,
+  }));
+
+  app.use(function(req, res, next) {
+    if (req.session && req.session.user) {
+        
+        user_model.findOne({
+            email: req.session.user.email
+        })
+        .then(user_model=>{
+
+            if (user_model) {
+                // expose the user to the template
+                req.user = user_model;
+                delete req.user.password; // delete the password from the session
+                req.session.user = user_model;  //refresh the session value
+                res.locals.user = user_model;
+
+                
+              }
+
+              next();
+
+        });
+
+        //next();
+    } else {
+      next();
+    }
+  });
+
+//   function requireLogin (req, res, next) {
+//     if (!req.user) {
+//       res.redirect('users/login');
+//     } else {
+//       next();
+//     }
+//   };
 
 //Express - Handlebars
 app.engine('handlebars', exphbs({
@@ -52,7 +100,7 @@ app.use(express.static(path.join(__dirname,'public')));
 //=========================//=========================
 
 //Index
-app.get('/', (req, res) => {
+app.get('/', requireLogin, (req, res) => { 
     res.render('index');
 })
 
