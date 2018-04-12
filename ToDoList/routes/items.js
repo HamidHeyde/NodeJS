@@ -1,22 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const {requireLogin} = require ('../helpers/auth')
 //==============================
 
 //Loading Models
 require('../models/list_item.js');
 const list_item_model = mongoose.model('list_item');
+require('../models/user');
+const user_model = mongoose.model('user');
 
 //Items
-router.get('/', (req, res) => {
-    list_item_model.find({})
-    .sort({date:'desc'})
-    .then(list_items => {
-        res.render('items', {
-            list_items:list_items
-        });
-    });
-    
+router.get('/', requireLogin, (req, res) => {
+
+    list_item_model.find({user_id:req.user._id})
+                .sort({date:'desc'})
+                .then(list_items => {
+                    res.render('items', {
+                        list_items:list_items
+                    });
+                });
 })
 
 
@@ -42,7 +45,7 @@ router.post('/', (req, res) => {
     else if (referal == 'add')
     {
         const new_item ={
-            user_id:1,
+            user_id:req.user._id,
             title:req.body.title,
             Description:req.body.description
         }
@@ -110,7 +113,7 @@ router.get('/edit/:id', (req,res) => {
     });
 });
 //Add New Items
-router.get('/add', (req, res) => {
+router.get('/add',  requireLogin,(req, res) => {
     res.render('items/add');
 })
 
