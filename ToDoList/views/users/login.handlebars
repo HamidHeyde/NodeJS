@@ -1,8 +1,18 @@
+{{#each errors}}
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="alert alert-danger alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{text}}
+    </div>
+  </div>
+</div>
+{{else}} {{/each}}
 <div class="row">
   <div class="col-md-6 mx-auto">
     <div class="card card-body">
       <h3 class="text-center">Account Login</h3>
-      <form>
+      <form action="/users/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" class="form-control" required>
