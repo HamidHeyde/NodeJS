@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //Schema
 const list_item_schema = new Schema({
     user_id:{
-        type:Number,
+        type:String,
         required:true
     },
     title:{
