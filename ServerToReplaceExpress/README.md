@@ -2,7 +2,7 @@
 
 This application, will create a server to receive requests and serves them back following items:
 
-##### StatusCode
+#### StatusCode
 The first argument is the Status Code for the requested URL (200: Success, 404: Not Found, etc.) 
 
 #### Data/Error
