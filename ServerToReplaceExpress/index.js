@@ -26,9 +26,18 @@ var server = http.createServer(function (req, res) {
             'headers': headers,
             'payload': buffer
         };
-        console.log(inData);
-        res.end();
 
+        var handler = (typeof(router[pathName]) == 'undefined') ? router['notFound'] : router[pathName];
+        handler(inData, function (statusCode, data) {
+
+            statusCode = typeof (statusCode) == 'number' ? statusCode : 200;
+            data = typeof (data) == 'object' ? data : {};
+            data = JSON.stringify(data);
+
+            res.setHeader('Content-Type', 'application/json');
+            res.writeHead(statusCode);
+            res.end(data);
+        });
     });
 });
 
