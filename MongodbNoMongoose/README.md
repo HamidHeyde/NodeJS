@@ -1,4 +1,4 @@
-# Server for Backend 
+# Server for backend for handling request and Mongodb operations (No Express, No Mongoose)
 
 This application, will create a server to receive requests and handle them, by passing the request to the any desired function (being defined in router.js) and serves them back following items on any desired port:
 #### StatusCode
@@ -17,4 +17,4 @@ The URL handlers can be easily added in the apiHandlers.js File.
 
 Through routers.js file, you can connect api handlers to the incomming URL(s). In other words, you can define, which incomming URL should go to what handler.
 
-# Building and application using the same logic, would cut the application dependency on "Express" or "Mongoose".
+#### Building and application using the same logic, would cut the application dependency on "Express" or "Mongoose".
