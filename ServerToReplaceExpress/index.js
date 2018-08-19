@@ -34,6 +34,9 @@ var server = http.createServer(function (req, res) {
             data = typeof (data) == 'object' ? data : {};
             data = JSON.stringify(data);
 
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
             res.setHeader('Content-Type', 'application/json');
             res.writeHead(statusCode);
             res.end(data);
