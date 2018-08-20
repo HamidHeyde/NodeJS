@@ -21,5 +21,5 @@ Through routers.js file, you can connect api handlers to the incomming URL(s). I
 
 For deploying this application, install Mongodb driver first, as it has not been uploaded.
 ```
-npm install --save mongodb
+npm install {color:red} --save mongodb {color:green}
 ```
