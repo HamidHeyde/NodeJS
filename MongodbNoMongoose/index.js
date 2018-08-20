@@ -3,6 +3,7 @@ var url = require('url');
 var stringDecoder = require('string_decoder').StringDecoder;
 
 var router = require('./router');
+var config = require('./config');
 
 http.createServer(function (req, res) {
 
@@ -41,8 +42,11 @@ http.createServer(function (req, res) {
         });
     });
 
-}).listen(2500, function () {
+}).listen(config.port, function () {
     console.log("\x1b[41m",
-        "http server running on port:2500"
+        "In the [ ",config.name," ] mode"
+        , "\x1b[0m");
+    console.log("\x1b[41m",
+        "http server running on port:",config.port
         , "\x1b[0m");
 });
