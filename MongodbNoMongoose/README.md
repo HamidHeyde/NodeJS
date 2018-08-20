@@ -18,3 +18,8 @@ The URL handlers can be easily added in the apiHandlers.js File.
 Through routers.js file, you can connect api handlers to the incomming URL(s). In other words, you can define, which incomming URL should go to what handler.
 
 #### Building and application using the same logic, would cut the application dependency on "Express" or "Mongoose".
+
+For using this app, install Mongodb driver first, as it has not been uploaded.
+```
+npm install --save mongodb
+```
