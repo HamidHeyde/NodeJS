@@ -2,12 +2,18 @@ var config = {};
 
 config.dev = {
     'name':'development',
-    'port':2500
+    'port':2500,
+    'db':{
+        'url':'mongodb://localhost:27017'
+    }
 };
 
 config.dep = {
     'name':'deployment',
-    'port':3500
+    'port':3500,
+    'db':{
+        'url':'mongodb://localhost:27017'
+    }
 };
 
 var chosenConfig = process.env.NODE_ENV;

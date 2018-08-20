@@ -30,7 +30,7 @@ http.createServer(function (req, res) {
         };
 
         var handler = (typeof (router[pathName]) != 'undefined') ? router[pathName] : router['notFound'];
-        handler(inData, function (statusCode, data) {
+        handler(inData, function (statusCode, contentType, data) {
 
             statusCode = typeof (statusCode) == 'number' ? statusCode : 200;
             data = typeof (data) == 'object' ? data : {};
@@ -44,9 +44,9 @@ http.createServer(function (req, res) {
 
 }).listen(config.port, function () {
     console.log("\x1b[41m",
-        "In the [ ",config.name," ] mode"
+        "In the [ ", config.name, " ] mode"
         , "\x1b[0m");
     console.log("\x1b[41m",
-        "http server running on port:",config.port
+        "http server running on port:", config.port
         , "\x1b[0m");
 });
