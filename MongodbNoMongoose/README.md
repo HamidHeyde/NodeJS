@@ -20,6 +20,6 @@ Through routers.js file, you can connect api handlers to the incomming URL(s). I
 #### Building and application using the same logic, would cut the application dependency on "Express" or "Mongoose".
 
 For deploying this application, install Mongodb driver first, as it has not been uploaded.
-```rubby
+```
 npm install --save mongodb
 ```
